@@ -148,20 +148,20 @@ scRecover <- function(counts, Kcluster = NULL, labels = NULL, outputDir = NULL, 
   write.csv(counts, file = paste0(outputDir, "raw_data.csv"))
   count_path <- paste0(outputDir, "raw_data.csv")
 
+   # Run MAGIC
+  if(MAGIC){
+    print("========================== Running MAGIC ==========================")
+    counts_MAGIC <- t(magic(t(counts), n.jobs = if(!parallel) 1 else -3)[[1]])
+    write.csv(counts_MAGIC, file = paste0(tempFileDir, "MAGIC_count.csv"))
+    print("========================== MAGIC finished =========================")
+  }
+                            
   # Run SAVER
   if(SAVER){
     print("========================== Running SAVER ==========================")
     counts_SAVER <- saver(counts, ncores = if(!parallel) 1 else detectCores() - 2)$estimate
     write.csv(counts_SAVER, file = paste0(tempFileDir, "SAVER_count.csv"))
     print("========================== SAVER finished =========================")
-  }
-
-  # Run MAGIC
-  if(MAGIC){
-    print("========================== Running MAGIC ==========================")
-    counts_MAGIC <- t(magic(t(counts), n.jobs = if(!parallel) 1 else -3)[[1]])
-    write.csv(counts_MAGIC, file = paste0(tempFileDir, "MAGIC_count.csv"))
-    print("========================== MAGIC finished =========================")
   }
 
   # Run scImpute
