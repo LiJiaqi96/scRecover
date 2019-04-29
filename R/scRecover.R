@@ -62,7 +62,7 @@
 
 
 
-scRecover <- function(counts, Kcluster = NULL, labels = NULL, outputDir = NULL, depth = 20, SAVER = FALSE, MAGIC = FALSE, UMI = FALSE, hist_raw_counts = NULL, hist_RUG_counts = NULL, parallel = FALSE, BPPARAM = bpparam(), verbose = TRUE){
+scRecover <- function(counts, Kcluster = NULL, labels = NULL, outputDir = NULL, depth = 20, SAVER = FALSE, MAGIC = FALSE, UMI = FALSE, hist_raw_counts = NULL, hist_RUG_counts = NULL, parallel = FALSE, scparallel = FALSE, BPPARAM = bpparam(), verbose = TRUE){
 
   # Handle SingleCellExperiment
   if(is(counts, "SingleCellExperiment")){
@@ -175,8 +175,8 @@ scRecover <- function(counts, Kcluster = NULL, labels = NULL, outputDir = NULL, 
     drop_thre = 0.5,              # threshold set on dropout probability
     Kcluster = Kcluster,          # 2 cell subpopulations
     labels = labels,              # Each cell type should have at least two cells for imputation
-    ncores = if(parallel & .Platform$OS.type != "windows") detectCores() - 5 else 1)    # number of cores used
-  if(parallel & .Platform$OS.type != "windows"){
+    ncores = if(scparallel & .Platform$OS.type != "windows") detectCores() - 5 else 1)    # number of cores used
+  if(scparallel & .Platform$OS.type != "windows"){
     env <- foreach:::.foreachGlobals
     rm(list=ls(name=env), pos=env)
   }
