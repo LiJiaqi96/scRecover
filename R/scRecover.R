@@ -62,7 +62,7 @@
 
 
 
-scRecover <- function(counts, Kcluster = NULL, labels = NULL, outputDir = NULL, depth = 20, SAVER = FALSE, MAGIC = FALSE, UMI = FALSE, hist_raw_counts = NULL, hist_RUG_counts = NULL, parallel = FALSE, scparallel = FALSE, BPPARAM = bpparam(), verbose = TRUE){
+scRecover <- function(counts, Kcluster = NULL, labels = NULL, outputDir = NULL, depth = 20, SAVER = FALSE, MAGIC = FALSE, UMI = FALSE, hist_raw_counts = NULL, hist_RUG_counts = NULL, parallel = FALSE, subparallel = FALSE, BPPARAM = bpparam(), verbose = TRUE){
 
   # Handle SingleCellExperiment
   if(is(counts, "SingleCellExperiment")){
@@ -151,7 +151,7 @@ scRecover <- function(counts, Kcluster = NULL, labels = NULL, outputDir = NULL, 
    # Run MAGIC
   if(MAGIC){
     print("========================== Running MAGIC ==========================")
-    counts_MAGIC <- t(magic(t(counts), n.jobs = if(!parallel) 1 else -3)[[1]])
+    counts_MAGIC <- t(magic(t(counts), n.jobs = if(!subparallel) 1 else -3)[[1]])
     write.csv(counts_MAGIC, file = paste0(tempFileDir, "MAGIC_count.csv"))
     print("========================== MAGIC finished =========================")
   }
@@ -159,7 +159,7 @@ scRecover <- function(counts, Kcluster = NULL, labels = NULL, outputDir = NULL, 
   # Run SAVER
   if(SAVER){
     print("========================== Running SAVER ==========================")
-    counts_SAVER <- saver(counts, ncores = if(!parallel) 1 else detectCores() - 2)$estimate
+    counts_SAVER <- saver(counts, ncores = if(!subparallel) 1 else detectCores() - 2)$estimate
     write.csv(counts_SAVER, file = paste0(tempFileDir, "SAVER_count.csv"))
     print("========================== SAVER finished =========================")
   }
