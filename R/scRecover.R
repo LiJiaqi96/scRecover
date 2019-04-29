@@ -175,8 +175,8 @@ scRecover <- function(counts, Kcluster = NULL, labels = NULL, outputDir = NULL, 
     drop_thre = 0.5,              # threshold set on dropout probability
     Kcluster = Kcluster,          # 2 cell subpopulations
     labels = labels,              # Each cell type should have at least two cells for imputation
-    ncores = if(scparallel & .Platform$OS.type != "windows") detectCores() - 5 else 1)    # number of cores used
-  if(scparallel & .Platform$OS.type != "windows"){
+    ncores = if(subparallel & .Platform$OS.type != "windows") detectCores() - 5 else 1)    # number of cores used
+  if(subparallel & .Platform$OS.type != "windows"){
     env <- foreach:::.foreachGlobals
     rm(list=ls(name=env), pos=env)
   }
