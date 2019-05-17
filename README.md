@@ -6,7 +6,7 @@
 
 *2019-05-17*
 
-1. More flexible control of parallel options. Users could choose to run parallel computation on pre-imputation methods or scRecover, respectively.
+1. More flexible control of parallel options. Users could choose to run parallel computation on pre-imputation methods and scRecover, respectively.
 
 2. Involve more pre-imputation methods in this pipeline.
 
