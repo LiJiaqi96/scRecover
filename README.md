@@ -1,7 +1,5 @@
 # scRecover
 
-**Test version, please refer to the github link below or use bioconductor to download the released version**
-
 *Modified by Jiaqi Li*
 
 *2019-05-17*
@@ -12,7 +10,7 @@
 
 
 
-
+**Test version, please refer to the github link below or use bioconductor to download the released version**
 
 
 
