@@ -2,6 +2,19 @@
 
 **Test version, please refer to the github link below or use bioconductor to download the released version**
 
+*Modified by Jiaqi Li*
+*2019-05-17*
+
+1. More flexible control of parallel options. Users could choose to run parallel computation on pre-imputation methods or scRecover, respectively.
+
+2. Involve more pre-imputation methods in this pipeline.
+
+
+
+
+
+
+
 
 
 *Zhun Miao, Xuegong Zhang*
